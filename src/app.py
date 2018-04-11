@@ -35,7 +35,7 @@ def main():
 @app.route("/stations")
 def get_stations():
  engine = get_db('se-project-db.cuph6akhej5q.us-east-2.rds.amazonaws.com','3306','projectdb','Manjunathsk92','Manjunathsk92')
- sql = "SELECT distinct station_name FROM projectdb.Dublin_bikes_realtime_week_data;"
+ sql = "SELECT distinct station_name,station_number,station_address,position_latitude,position_longitude FROM projectdb.Dublin_bikes_realtime_week_data;"
  rows = engine.execute(sql).fetchall()
  print('#found {} stations', len(rows))
  return jsonify(stations=[dict(row.items()) for row in rows]) 

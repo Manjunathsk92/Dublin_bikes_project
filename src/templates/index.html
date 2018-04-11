@@ -5,7 +5,7 @@
       <!-- Google map API and key -->
 	  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
        
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC36Mq4sQqGL0ePgZRKN_FqCeY1olujJFM&callback=initMap"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC36Mq4sQqGL0ePgZRKN_FqCeY1olujJFM"></script>
       <!-- For the jquery -->
       <script src="/static/js/jquery-3.2.0.min.js"></script>
       <!-- This is to get the _.ForEach working in the javaScript file -->
@@ -13,9 +13,23 @@
       <link href="/static/style.css" rel="stylesheet" type="text/css">
       <!--<link rel="icon" href="data:;base64,iVBORw0KGgo=">-->
       <title>Dublin Bikes project</title>
+       <style>
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+#map {
+height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+height: 100%;
+margin: 0;
+padding: 0;
+}
+       </style>
    </head>
    <body>
        <header>
+    <!--<img src="../static/logo.JPG" alt="BikeLogo" style="float: right; width: 200px; height: 90px; border: none; margin-top: 8px;">-->
   <h1>Dublin Bikes project</h1>
        </header>
        <br><br>

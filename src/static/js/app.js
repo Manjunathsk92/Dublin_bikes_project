@@ -1,14 +1,11 @@
-var map;
-function initMap() {
-map = new google.maps.Map(document.getElementById('map'), {
-center: {lat: -34.397, lng: 150.644},
-zoom: 8
-});
-}
 
-/*function showStationMarkers()
+function showStationMarkers()
 {
-
+var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        center: new google.maps.LatLng(53.3438, -6.2546),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
 
     // Info window from Google Map API https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple
 
@@ -18,17 +15,17 @@ var jqxhr = $.getJSON("/stations", function(data) {
  console.log('stations', stations);
  _.forEach(stations, function(station) 
 	 {
-	  console.log(station.name, station.number);
+//	  console.log(station.name, station.number);
  var marker = new google.maps.Marker({
  position : {
- lat : station.position_lat,
- lng : station.position_lng
+ lat : station.position_latitude,
+ lng : station.position_longitude
  },
  map : map,
- title : station.name,
- station_number : station.number
+ title : station.station_name,
+ station_number : station.station_number
  });
- contentString = '<div id="content"><h1>' + station.name + '</h1></div>'
+ contentString = '<div id="content"><h1>' + station.station_name + '</h1></div>'
  + '<div id="station_availability"></div>';
  google.maps.event.addListener(marker, 'click', function() {
  // what is the “this” variable when drawInfoWindowChart is called?
@@ -39,6 +36,6 @@ var jqxhr = $.getJSON("/stations", function(data) {
  .fail(function() {
  console.log( "error" );
  })
-}*/
+}
 
 showStationMarkers();

@@ -29,4 +29,4 @@ def get_stations():
  return jsonify(stations=[dict(row.items()) for row in rows]) 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
