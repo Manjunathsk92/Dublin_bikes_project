@@ -1,5 +1,4 @@
 
-
 function showStationMarkers()
 {
 var map = new google.maps.Map(document.getElementById('map'), {
@@ -16,26 +15,25 @@ var jqxhr = $.getJSON("/stations", function(data) {
  console.log('stations', stations);
  _.forEach(stations, function(station) 
 	 {
-	  console.log(station.available_bikes, station.bike_stands);
+	  console.log(station.available_bikes, station.available_bike_stands);
  var marker = new google.maps.Marker({
  position : {
  lat : station.position_latitude,
  lng : station.position_longitude
  },
  map : map,
- icon: defineMarker(station.available_bikes,station.bike_stands),
  title : station.station_name+" Station Number :"+ station.station_number
  });
 marker.metadata = {type: "point", id: station.station_number};
                 google.maps.event.addListener(marker, 'click', (function(marker, stations) {
                     return function() {
-                        if (parseInt(station.banking) == 0) {
+                        /*if (parseInt(station.banking) == 0) {
                             station.banking = "No";
                         } else {
                             station.banking = "Yes";
-                        }
+                        }*/
 						var station_number = station.station_number;
-                    	var content = "Station name: " + station.station_name + "<br>" + "Station number: " + station.station_number + "<br>" + "Address: " + station.station_address + "<br>" + station.banking +"<br>";
+                    	var content = "Station name: " + station.station_name + "<br>" + "Station number: " + station.station_number + "<br>" + "Address: " + station.station_address + "<br>";
                         var button = "<button onclick='showDiv(); getOccupancy(" + station_number + ")'>Click here for more detailed information!</button>";
                         infoWindow.setContent(content + "<br> " + button);
                         infoWindow.open(map, marker);
@@ -51,22 +49,29 @@ marker.metadata = {type: "point", id: station.station_number};
 
 showStationMarkers();
 
-function defineMarker(bikes, stands) {
+/*function defineMarker(bikes, stands,sliderChecked) {
     //function which defines the color of the marker, depending on the occupancy of the station
 	console.log(bikes,stands);
-       
+        if (sliderChecked) {
             //sliderChecked shows the user the number of available bikes at each station
-            if ((bikes/stands)<=0.3) {
-                return '../static/images/green1.png'            }
-        else if (bikes/stands<=0.6) {
-                return '../static/images/yellow1.png'
+            if ((bikes/stands) <= 0.3) {
+                return "{{url_for('static', filename='greentriangle.png')}}"
+            } else if (bikes/stands <= 0.6) {
+                return "{{url_for('static', filename='yellowtriangle.png')}}"
             } else {
-                return '../static/images/red1.png'
+                return "{{url_for('static', filename='redtriangle.png')}}"
             }
-      
-         
-        
-    }
+        } else {
+            //slider not checked shows the user the number of empty bike stands at each station
+            if ((bikes/stands) >= 0.7) {
+                return "{{url_for('static', filename='greentriangle.png')}}"
+            } else if (bikes/stands >= 0.4) {
+                return "{{url_for('static', filename='yellowtriangle.png')}}"
+            } else {
+                return "{{url_for('static', filename='redtriangle.png')}}"
+            }
+        }
+    }*/
 
 function showDiv(){
     div = document.getElementById("display");
