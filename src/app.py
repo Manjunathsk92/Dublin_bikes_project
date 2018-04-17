@@ -35,38 +35,37 @@ def main():
 @app.route("/stations")
 def get_stations():
  engine = get_db('se-project-db.cuph6akhej5q.us-east-2.rds.amazonaws.com','3306','projectdb','Manjunathsk92','Manjunathsk92')
- sql="select station_name,station_number,station_address,position_latitude,position_longitude,banking,bike_stands,available_bike_stands,available_bikes from dublin_bikes_current_data";
+ sql="select station_name,station_number,station_address,position_latitude,position_longitude,banking,bike_stands,available_bike_stands,available_bikes from projectdb.dublin_bikes_current_data";
  #sql = "SELECT distinct station_name,station_number,station_address,position_latitude,position_longitude FROM projectdb.Dublin_bikes_realtime_week_data;"
  #sql="SELECT station_number,station_name,station_address,banking,bike_stands,available_bike_stands, available_bikes, substring(from_unixtime(insert_timestamp),1,16) FROM  projectdb.Dublin_bikes_realtime_week_data where insert_timestamp<=(select max(insert_timestamp) from projectdb.Dublin_bikes_realtime_week_data) and insert_timestamp>= (select max(insert_timestamp)-10 from  projectdb.Dublin_bikes_realtime_week_data) group by station_number;"
  rows = engine.execute(sql).fetchall()
  print('#found {} stations', len(rows))
  return jsonify(stations=[dict(row.items()) for row in rows])
 
-@app.route("/availability")
+'''@app.route("/availability")
 #@cross_origin()
 def availability():
     engine = get_db('se-project-db.cuph6akhej5q.us-east-2.rds.amazonaws.com','3306','projectdb','Manjunathsk92','Manjunathsk92')
     # change this to suit what queries we will be using
-    sql = "SELECT station_number,station_name,station_address,bike_stands,available_bike_stands, available_bikes, substring(from_unixtime(insert_timestamp),1,16) FROM  projectdb.Dublin_bikes_realtime_week_data where insert_timestamp<=(select max(insert_timestamp) from projectdb.Dublin_bikes_realtime_week_data) and insert_timestamp>= (select max(insert_timestamp)-10 from  projectdb.Dublin_bikes_realtime_week_data) group by station_number;"
+    sql="select station_name,station_number,station_address,position_latitude,position_longitude,banking,bike_stands,available_bike_stands,available_bikes from projectdb.dublin_bikes_current_data";
     rows = engine.execute(sql).fetchall()
     print("#found {} availability", len(rows))
     availability = jsonify(stations=[dict(row) for row in rows])
     engine.dispose()
-    return availability
+    return availability'''
 
-'''@app.route('/station_details', methods=['GET', 'POST'])
+@app.route('/station_details', methods=['GET', 'POST'])
 #@cross_origin()
 def station_details():
     """Function to get dyanmic details for stations"""
     #Info will be pulled from a javascript function on the home page
     station_number = request.args.get('station_number')
-    engine = scraper.connect_db("DublinBikeProjectDB.cun91scffwzf.eu-west-1.rds.amazonaws.com", "3306", "DublinBikeProjectDB", "theForkAwakens", "/home/ubuntu/anaconda3/envs/TheForkAwakens/Assignment4-P-E-K/src/scraper/db_password.txt")
-    sql = "SELECT *, station_name FROM availability, bike_stations WHERE availability.station_number = %s and
-    availability.station_number = bike_stations.station_number ORDER BY last_updated DESC LIMIT 1;"
+    engine = get_db('se-project-db.cuph6akhej5q.us-east-2.rds.amazonaws.com','3306','projectdb','Manjunathsk92','Manjunathsk92')
+    sql = "select station_name,station_number,station_address,position_latitude,position_longitude,banking,bike_stands,available_bike_stands,available_bikes from projectdb.dublin_bikes_current_data where station_number=%s";
     rows = engine.execute(sql, station_number).fetchall()
-    print("#found {} stations", len(details))
-    return jsonify(stations=[dict(row.items()) for row in rows)'''
+    print("#found {} stations", len(rows))
+    return jsonify(stations=[dict(row.items()) for row in rows])
  
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

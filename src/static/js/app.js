@@ -35,7 +35,7 @@ marker.metadata = {type: "point", id: station.station_number};
                             station.banking = "Yes";
                         }
 						var station_number = station.station_number;
-                    	var content = "Station name: " + station.station_name + "<br>" + "Station number: " + station.station_number + "<br>" + "Address: " + station.station_address + "<br>" + station.banking +"<br>";
+                    	var content = "Station name: " + station.station_name + "<br>" + "Station number: " + station.station_number + "<br>" + "Address: " + station.station_address + "<br>" + "Banking" +station.banking +"<br>";
                         var button = "<button onclick='showDiv(); getOccupancy(" + station_number + ")'>Click here for more detailed information!</button>";
                         infoWindow.setContent(content + "<br> " + button);
                         infoWindow.open(map, marker);
@@ -76,7 +76,7 @@ function showDiv(){
 
 function getOccupancy(station_number) {
     document.getElementById("availability").style.display = "inline-block";
-    var jqxhr = $.getJSON("availability", function(data){
+    var jqxhr = $.getJSON("/station_details?station_number=" + station_number, function(data){
         var station_details = data.stations;
         _.forEach(station_details, function(station){
             var content = "<b><u>Station:</u></b> <br><br> Address: " + station.station_address + "<br><br>" + "<b><u>Currently there are: </u></b><br><br> Bikes available: " + station.available_bikes +"<br>" + "Bike stands available: " + station.available_bike_stands + "<br>";
