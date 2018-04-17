@@ -1,9 +1,46 @@
+body {
+    background-color: white;
+    font-family: "calibri";
+}
+
+
+header, footer {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: #084C55;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    max-height: 100px;
+    border-radius: 15px;
+    width: 100%;
+    position: relative;
+}
+
+
 #map {
-height: 100%;
+    border-radius: 5px;
 }
-/* Optional: Makes the sample page fill the window. */
-html, body {
-height: 100%;
-margin: 0;
-padding: 0;
+
+
+div.container {
+    width: 90%;
+    height: 540px;
+    margin: auto;
+    display: block;
+    position: relative;
 }
+
+
+div.inline {
+    float: left;
+    max-width: 1000px;
+    border: 2px solid black;
+    position: absolute;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
+
