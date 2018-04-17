@@ -1,0 +1,5 @@
+
+[console_scripts]
+# script_name = dublibikes.module:function
+# For example:
+# fibonacci = dublibikes.skeleton:run

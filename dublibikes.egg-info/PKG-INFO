@@ -1,0 +1,32 @@
+Metadata-Version: 1.1
+Name: dublibikes
+Version: 0.0+none
+Summary: Add a short description here!
+Home-page: http://...
+Author: Anjali
+Author-email: anjali.pgowda@.com
+License: mit
+Description-Content-Type: UNKNOWN
+Description: ==========
+        dublibikes
+        ==========
+        
+        
+        Add a short description here!
+        
+        
+        Description
+        ===========
+        
+        A longer description of your project goes here...
+        
+        
+        Note
+        ====
+        
+        This project has been set up using PyScaffold 3.0.2. For details and usage
+        information on PyScaffold see http://pyscaffold.org/.
+        
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python

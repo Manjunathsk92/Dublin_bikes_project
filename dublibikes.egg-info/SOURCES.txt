@@ -1,0 +1,11 @@
+README.rst
+setup.cfg
+src/dublibikes/__init__.py
+src/dublibikes/skeleton.py
+src/dublibikes/views.py
+src/dublibikes.egg-info/PKG-INFO
+src/dublibikes.egg-info/SOURCES.txt
+src/dublibikes.egg-info/dependency_links.txt
+src/dublibikes.egg-info/entry_points.txt
+src/dublibikes.egg-info/not-zip-safe
+src/dublibikes.egg-info/top_level.txt
