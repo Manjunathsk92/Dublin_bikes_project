@@ -123,7 +123,7 @@ var corrected_date;
 
     }
     var ele_time=document.getElementById('select_time');
-    for (var i=0; i<25; i++){
+    for (var i=0; i<24; i++){
         hour_value= String(i);
         if (hour_value.length == 1){
             hour_value="0" + hour_value;
@@ -174,6 +174,10 @@ function updateChart() {
 		google.charts.setOnLoadCallback(drawChart(data));
 	});
     //alert(date_time);
+    
+}
+
+function getPrediction(){
     $.get("/predicted_value?station_number=" + station_number + "&date_time=" + date_time + "&hire_or_return=" + hire_or_return, function(data){
         alert(data);
         //alert(int(data.substr(2,7)));
@@ -185,6 +189,7 @@ function updateChart() {
         }
         
     })
+    updateChart();
 }
 
 function show() {
@@ -198,8 +203,15 @@ function show() {
     hire_or_return=document.getElementById("hire_or_return").value;
     date_time = String(selected_date) + ' ' + String(selected_time);
     //alert(date_time);
-    
-	updateChart();
+    if (selected_date == '' || selected_time == '' || hire_or_return=='' || station_number==''){
+        alert("Please enter all the details and click submit");
+    }
+    else {
+        document.getElementById("predicted_bikes").innerHTML="Please wait while we fetch the required details";
+        getPrediction();
+        
+         }
+	
 
 }
 

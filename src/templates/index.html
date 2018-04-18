@@ -54,12 +54,7 @@ padding: 0;
                <option value="">-- Select --</option>
            </select>
        </div>
-       <div id="dTime">
-           <select id="select-time" onchange="updateType(this)">
-               <option selected value="daily">Daily</option>
-               <option value="hourly">Hourly</option>
-           </select>
-       </div>
+       
        <div id="date_dropdown" >
     <select id="select_date" >
                <option value="">-- Select date --</option>
@@ -78,8 +73,17 @@ padding: 0;
         <button id="button1" type="button" onclick="show()">Submit</button>
     </form>
     </div>
-       <div class="stats" id ="daily_div"></div>
+       <br>
        <div id="predicted_bikes"></div>
+       <br>
+       <div id="dTime">
+           <select id="select-type" onchange="updateType(this)">
+               <option selected value="daily">Daily</option>
+               <option value="hourly">Hourly</option>
+           </select>
+       </div>
+       <div class="stats" id ="daily_div"></div>
+       
  </body>
 </html>
 

@@ -84,7 +84,7 @@ def daily_avg_dynamic(station_number, type='daily'):
     if type == 'daily':
         sql = text("SELECT AVG(available_bikes) as avg_bikes, AVG(available_bike_stands) as avg_stands, station_number, DATE_FORMAT(FROM_UNIXTIME(`insert_timestamp`), '%e %b %Y') AS 'date_formatted' FROM Dublin_bikes_realtime_week_data WHERE insert_timestamp >= unix_timestamp(curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY) AND insert_timestamp < unix_timestamp(curdate() - INTERVAL DAYOFWEEK(curdate())-1 DAY) and station_number = " + str(st_num) +" group by date_formatted order by insert_timestamp asc;")
     else:
-        sql = text("SELECT AVG( available_bikes ) as avg_bikes, AVG(available_bike_stands) as avg_stands, from_unixtime(insert_timestamp) AS 'date_formatted' FROM Dublin_bikes_realtime_week_data where insert_timestamp < unix_timestamp(curdate() - 1) and insert_timestamp > unix_timestamp(curdate() - 2) and station_number = "+ str(st_num) +" GROUP BY DATE( date_formatted ), HOUR( date_formatted );")
+        sql = text("SELECT AVG( available_bikes ) as avg_bikes, AVG(available_bike_stands) as avg_stands, substring(from_unixtime(insert_timestamp),12,2) AS 'date_formatted' FROM Dublin_bikes_realtime_week_data where insert_timestamp < unix_timestamp(curdate() - 1) and insert_timestamp > unix_timestamp(curdate() - 2) and station_number = "+ str(st_num) +" GROUP by date_formatted ;")
     results = engine.execute(sql).fetchall()
     engine.dispose()
     print('#found {} stations', len(results))
