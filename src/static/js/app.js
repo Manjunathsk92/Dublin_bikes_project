@@ -146,7 +146,7 @@ function drawChart(data) {
 
     var data_daily = new google.visualization.DataTable(data_array_bikes);
 
-    data_daily.addColumn('string', 'Date');
+    data_daily.addColumn('string', 'Date/time');
     data_daily.addColumn('number', 'Bikes');
     data_daily.addColumn('number', 'Stands');
 
@@ -179,7 +179,7 @@ function updateChart() {
 
 function getPrediction(){
     $.get("/predicted_value?station_number=" + station_number + "&date_time=" + date_time + "&hire_or_return=" + hire_or_return, function(data){
-        alert(data);
+        //alert(data);
         //alert(int(data.substr(2,7)));
         if (hire_or_return=="hire"){
             document.getElementById("predicted_bikes").innerHTML="<p> Number of bikes available at given time and date at above station is " + data + "</p>";
@@ -200,13 +200,29 @@ function show() {
     //alert(station_number);
     selected_date=document.getElementById("select_date").value;
     selected_time=document.getElementById("select_time").value;
+    var current_date = new Date(new Date().getTime());
+    //alert(selected_date.substring(8,));
+    //alert(current_date.getDate());
+    
+    //alert(current_date);
     hire_or_return=document.getElementById("hire_or_return").value;
     date_time = String(selected_date) + ' ' + String(selected_time);
     //alert(date_time);
     if (selected_date == '' || selected_time == '' || hire_or_return=='' || station_number==''){
         alert("Please enter all the details and click submit");
     }
-    else {
+    else if (selected_date.substring(8,) == current_date.getDate()){
+        //alert(current_date.getHours());
+        if (parseInt(selected_time) <= parseInt(current_date.getHours())){
+            alert("Please select valid time. ");
+        }
+        else {
+            document.getElementById("predicted_bikes").innerHTML="Please wait while we fetch the required details";
+        getPrediction();
+        }
+    }
+    else
+ {
         document.getElementById("predicted_bikes").innerHTML="Please wait while we fetch the required details";
         getPrediction();
         
