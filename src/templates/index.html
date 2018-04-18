@@ -50,7 +50,7 @@ padding: 0;
        </div>
 <!-- Displaying charts -->      
        <div id="dropdown">
-           <select id="select" onchange="show(this)">
+           <select id="select" >
                <option value="">-- Select --</option>
            </select>
        </div>
@@ -60,7 +60,26 @@ padding: 0;
                <option value="hourly">Hourly</option>
            </select>
        </div>
+       <div id="date_dropdown" >
+    <select id="select_date" >
+               <option value="">-- Select date --</option>
+           </select>
+           <select id="select_time" >
+               <option value="">-- Select time --</option>
+           </select>
+           <select id="hire_or_return"> 
+           <option value="">-- Hire or return a bike--</option>
+               <option value="hire">Hire a bike</option>
+               <option value="return">Return a bike</option>
+           </select>
+    <form>
+       
+        <br>
+        <button id="button1" type="button" onclick="show()">Submit</button>
+    </form>
+    </div>
        <div class="stats" id ="daily_div"></div>
+       <div id="predicted_bikes"></div>
  </body>
 </html>
 

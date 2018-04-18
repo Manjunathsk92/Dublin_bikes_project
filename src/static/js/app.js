@@ -1,8 +1,13 @@
 var station_number = 1;
 var type = 'daily';
+var selected_date;
+var selected_time;
+var date_time;
+var hire_or_return;
 
 function showStationMarkers()
 {
+    
 var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         center: new google.maps.LatLng(53.3438, -6.2546),
@@ -90,13 +95,41 @@ function getOccupancy(station_number) {
 //dropdown for stations
 
 function getDropDown(stations) {
-	let ele = document.getElementById('select');
-
-    for (let i = 0; i < stations.length; i++) {
+	var ele = document.getElementById('select');
+    
+    for (var i = 0; i < stations.length; i++) {
+        
         // populate select element with json data
         ele.innerHTML = ele.innerHTML +
             '<option value="' + stations[i].station_number+ '">' + stations[i].station_address + '</option>';
 
+    }
+    var ele_date = document.getElementById('select_date');
+var corrected_date;
+    for (var i = 0; i < 5; i++) {
+        var currentDate = new Date(new Date().getTime() + 24*i * 60 * 60 * 1000);
+        //alert(currentDate);
+        var new_date = String(currentDate.getDate());
+        if (new_date.length == 1) {
+            new_date= "0" + new_date;
+        }
+        var new_month =  String(currentDate.getMonth());
+        if (new_month.length == 1) {
+            new_month="0" + new_month;
+        }
+        corrected_date=currentDate.getFullYear()  + "-" + new_month + "-" + new_date;
+        ele_date.innerHTML = ele_date.innerHTML +
+            '<option value="' + corrected_date+  '">' + corrected_date + '</option>';
+
+    }
+    var ele_time=document.getElementById('select_time');
+    for (var i=0; i<25; i++){
+        hour_value= String(i);
+        if (hour_value.length == 1){
+            hour_value="0" + hour_value;
+        }
+        ele_time.innerHTML = ele_time.innerHTML +
+            '<option value="' + hour_value +  '">' + hour_value + '</option>';
     }
 }
 
@@ -136,13 +169,36 @@ function updateType(ele) {
 }
 
 function updateChart() {
+    //alert("in get dropdown");
 	$.getJSON("/charts_daily?station_number=" + station_number + "&type=" + type, function(data) {
 		google.charts.setOnLoadCallback(drawChart(data));
 	});
+    //alert(date_time);
+    $.get("/predicted_value?station_number=" + station_number + "&date_time=" + date_time + "&hire_or_return=" + hire_or_return, function(data){
+        alert(data);
+        //alert(int(data.substr(2,7)));
+        if (hire_or_return=="hire"){
+            document.getElementById("predicted_bikes").innerHTML="<p> Number of bikes available at given time and date at above station is " + data + "</p>";
+        }
+        else {
+            document.getElementById("predicted_bikes").innerHTML="<p> Number of bike stands available at given time and date at above station is " + data + "</p>";
+        }
+        
+    })
 }
 
-function show(ele) {
-	station_number = ele.options[ele.selectedIndex].value;
+function show() {
+    station_number=document.getElementById("select").value;
+    //alert(ele);
+    //alert(document.getElementById("select").value);
+	//station_number = ele.options[ele.selectedIndex].value;
+    //alert(station_number);
+    selected_date=document.getElementById("select_date").value;
+    selected_time=document.getElementById("select_time").value;
+    hire_or_return=document.getElementById("hire_or_return").value;
+    date_time = String(selected_date) + ' ' + String(selected_time);
+    //alert(date_time);
+    
 	updateChart();
 
 }
