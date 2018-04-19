@@ -7,7 +7,8 @@ var hire_or_return;
 
 function showStationMarkers()
 {
-    
+
+getWeatherInfo();
 var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         center: new google.maps.LatLng(53.3438, -6.2546),
@@ -20,10 +21,11 @@ var map = new google.maps.Map(document.getElementById('map'), {
 var jqxhr = $.getJSON("/stations", function(data) {
 var stations = data.stations;
 getDropDown(stations);
+
  //console.log('stations', stations);
  _.forEach(stations, function(station) 
 	 {
-	  console.log(station.available_bikes, station.bike_stands);
+	  //console.log(station.available_bikes, station.bike_stands);
  var marker = new google.maps.Marker({
  position : {
  lat : station.position_latitude,
@@ -42,7 +44,7 @@ marker.metadata = {type: "point", id: station.station_number};
                             station.banking = "Yes";
                         }
 						var station_number = station.station_number;
-                    	var content = "Station name: " + station.station_name + "<br>" + "Station number: " + station.station_number + "<br>" + "Address: " + station.station_address + "<br>" + "Banking" +station.banking +"<br>";
+                    	var content = "Station name: " + station.station_name + "<br>" + "Station number: " + station.station_number + "<br>" + "Address: " + station.station_address + "<br>" + "Banking:" +station.banking +"<br>";
                         var button = "<button onclick='showDiv(); getOccupancy(" + station_number + ")'>Click here for more detailed information!</button>";
                         infoWindow.setContent(content + "<br> " + button);
                         infoWindow.open(map, marker);
@@ -50,12 +52,25 @@ marker.metadata = {type: "point", id: station.station_number};
                 })(marker, stations));
             })
         })
+
+   
         .fail(function() {
             console.log("error");
         })
 }
 
 
+function getWeatherInfo(){
+   
+    var jqxhr =$.getJSON('http://api.openweathermap.org/data/2.5/weather?id=7778677&APPID=a333fd4b6cc086808ce5e483c98b85f6',function(data){
+   
+    var icon = data.weather[0].icon;
+    var iconUrl = ("<img src='http://openweathermap.org/img/w/" + icon + ".png'>");
+    var weatherdata= "<b><u>Weather Details:</u></b> <br><br>Current Weather:" + data.weather[0].description+ "<br> Current Temperature: " + data.main.temp + "<br> Wind Speed " + data.wind.speed +"<br>" +iconUrl + "<br>";
+    alert(weatherdata);
+        document.getElementById("weather_info").innerHTML = weatherdata;
+});
+}
 //showStationMarkers();
 
 function defineMarker(bikes, stands) {
