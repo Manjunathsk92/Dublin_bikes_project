@@ -13,9 +13,10 @@ body,html {
     height: 100%; 
 
     /* Center and scale the image nicely */
-    background-position: center;
+    /*background-position: center;*/
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 header, footer {
@@ -60,11 +61,11 @@ header, footer {
 
 
 
-div.container {
+/*div.container {
     width: 440px;
-    height: 440px;
+    height: 400px;
     float:left;
-}
+}*/
 
 
 
@@ -105,7 +106,7 @@ div.container2 {
 
     width: 280px;
    
-    height: 380px;
+    height: 280px;
     display: block;
     position: relative;
     float: right;
@@ -132,10 +133,6 @@ div.polaroid {
 
 
 
-div.stats {
-   
-
-}
 
 
 
@@ -161,12 +158,36 @@ button:hover {
     color: white;
 
 }
-#menu{
-    margin-top: 30%;
+#button1 {
+    width: 8%;
 }
 
-div.dropdown{
-    clear: both;
+
+#dropdown{
+    /*margin-top: 30%;*/
+    /*height: 50%;*/
+    /*clear: both;
+    float: left;
+    clear: left;*/
     float: left;
     clear: left;
+}
+#predicted_bikes {
+    /*margin-left: 30%;
+    float: left;*/
+    /*width: 50%;
+    margin-top: 50%;*/
+    
+}
+
+#daily_div{
+    /*width: 10%;
+    float: right;*/
+    margin-right: 5%;
+    margin-top: 5%;
+}
+#dTime{
+    width: 10%;
+    float: right;
+    margin-right: 25%;
 }

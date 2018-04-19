@@ -66,8 +66,8 @@ function getWeatherInfo(){
    
     var icon = data.weather[0].icon;
     var iconUrl = ("<img src='http://openweathermap.org/img/w/" + icon + ".png'>");
-    var weatherdata= "<b><u>Weather Details:</u></b> <br><br>Current Weather:" + data.weather[0].description+ "<br> Current Temperature: " + data.main.temp + "<br> Wind Speed " + data.wind.speed +"<br>" +iconUrl + "<br>";
-    alert(weatherdata);
+    var weatherdata= "<br><b><u>Weather Details:</u></b> <br><br>Current Weather:" + data.weather[0].description+ "<br> Current Temperature: " + parseInt(data.main.temp - 273) + " &#8451;" +"<br> Wind Speed: " + parseFloat(data.wind.speed * 3.6) + " km/hr" + "<br>" +iconUrl + "<br>";
+    //alert(weatherdata);
         document.getElementById("weather_info").innerHTML = weatherdata;
 });
 }
@@ -169,7 +169,7 @@ function drawChart(data) {
 
 
     //Set chart options
-    var options = {'title': 'Daily Averages:', 'width': 700, 'height': 550};
+    var options = {'title': 'Daily Averages:', 'width': 450, 'height': 350};
 
     //instantiate and draw our chart, passing in some options
     var chart = new google.charts.Bar(document.getElementById('daily_div'));

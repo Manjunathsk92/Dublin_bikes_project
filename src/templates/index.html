@@ -37,12 +37,12 @@ padding: 0;
   <h1>Dublin Bikes project</h1>
        </header>
        <br><br>
-      <div class="container">
+      
 <!-- Display the map -->
             <div class="inline" id="map" style="width:60%;height:50%;">
                                 <script src="/static/js/app.js"></script>
                                  </div>
-                 </div>
+                 
 <!--  To display current weather information etc.   -->
            <div id="weather_info"></div>
   <!--  To display stats - occupancy information etc.   -->
@@ -52,14 +52,14 @@ padding: 0;
        </div>
        </div>
 <!-- Displaying charts -->   
-           <div id="menu">
-       <div id="dropdown">
+           
+       <div id="dropdown" style="width: 50%; margin-top: 30%;">
            <select id="select" >
                <option value="">-- Select --</option>
            </select>
-       </div>
        
-       <div id="date_dropdown" >
+       
+       
     <select id="select_date" >
                <option value="">-- Select date --</option>
            </select>
@@ -76,18 +76,22 @@ padding: 0;
         <br>
         <button id="button1" type="button" onclick="show()">Submit</button>
     </form>
+           <br>
+       
+       <br>
+           <div id="predicted_bikes"></div>
     </div>
-       <br>
-       <div id="predicted_bikes"></div>
-       <br>
+               
+       
        <div id="dTime">
            <select id="select-type" onchange="updateType(this)">
                <option selected value="daily">Daily</option>
                <option value="hourly">Hourly</option>
                           </select>
-       </div>
-               <div class="stats" id ="daily_div"></div>
-       </div>
+       <div class="stats" id ="daily_div"></div>
+           </div>
+               
+       
        </div>
  </body>
 </html>
