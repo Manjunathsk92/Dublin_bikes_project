@@ -19,6 +19,7 @@ var map = new google.maps.Map(document.getElementById('map'), {
 
  var infoWindow = new google.maps.InfoWindow();
 var jqxhr = $.getJSON("/stations", function(data) {
+    $(".se-pre-con").hide();
 var stations = data.stations;
 getDropDown(stations);
 
@@ -66,7 +67,7 @@ function getWeatherInfo(){
    
     var icon = data.weather[0].icon;
     var iconUrl = ("<img src='http://openweathermap.org/img/w/" + icon + ".png'>");
-    var weatherdata= "<br><b><u>Weather Details:</u></b> <br><br>Current Weather:" + data.weather[0].description+ "<br> Current Temperature: " + parseInt(data.main.temp - 273) + " &#8451;" +"<br> Wind Speed: " + parseFloat(data.wind.speed * 3.6) + " km/hr" + "<br>" +iconUrl + "<br>";
+    var weatherdata= "<br><b><u>Weather Details:</u></b> <br><br>Current Weather:" + data.weather[0].description+ "<br> Current Temperature: " + parseInt(data.main.temp - 273) + " &#8451;" +"<br> Wind Speed: " + parseFloat(data.wind.speed * 3.6).toFixed(2) + " km/hr" + "<br>" +iconUrl + "<br>";
     //alert(weatherdata);
         document.getElementById("weather_info").innerHTML = weatherdata;
 });
@@ -91,6 +92,7 @@ function defineMarker(bikes, stands) {
     }
 
 function showDiv(){
+    $(".se-pre-con").show();
     div = document.getElementById("display");
     div.style.display = "inline-block";
 }
@@ -99,6 +101,7 @@ function showDiv(){
 function getOccupancy(station_number) {
     document.getElementById("availability").style.display = "inline-block";
     var jqxhr = $.getJSON("/station_details?station_number=" + station_number, function(data){
+        $(".se-pre-con").hide();
         var station_details = data.stations;
         _.forEach(station_details, function(station){
             var content = "<b><u>Station:</u></b> <br><br>Station Number:" + station.station_number+ "<br> Address: " + station.station_address + "<br><br>" + "<b><u>Currently there are: </u></b><br><br> Bikes available: " + station.available_bikes +"<br>" + "Bike stands available: " + station.available_bike_stands + "<br>";
@@ -186,6 +189,7 @@ function updateType(ele) {
 function updateChart() {
     //alert("in get dropdown");
 	$.getJSON("/charts_daily?station_number=" + station_number + "&type=" + type, function(data) {
+        $(".se-pre-con").hide();
 		google.charts.setOnLoadCallback(drawChart(data));
 	});
     //alert(date_time);
@@ -208,6 +212,7 @@ function getPrediction(){
 }
 
 function show() {
+    $(".se-pre-con").show();
     station_number=document.getElementById("select").value;
     //alert(ele);
     //alert(document.getElementById("select").value);
@@ -225,11 +230,13 @@ function show() {
     //alert(date_time);
     if (selected_date == '' || selected_time == '' || hire_or_return=='' || station_number==''){
         alert("Please enter all the details and click submit");
+        $(".se-pre-con").hide();
     }
     else if (selected_date.substring(8,) == current_date.getDate()){
         //alert(current_date.getHours());
         if (parseInt(selected_time) <= parseInt(current_date.getHours())){
             alert("Please select valid time. ");
+            $(".se-pre-con").hide();
         }
         else {
             document.getElementById("predicted_bikes").innerHTML="Please wait while we fetch the required details";
@@ -248,6 +255,7 @@ function show() {
 
 
 function init() {
+    $(".se-pre-con").show();
 	showStationMarkers();
 }
 

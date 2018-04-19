@@ -15,7 +15,7 @@
        <script type="text/javascript">google.charts.load('current', {'packages':['bar']});</script>
       <link href="/static/style.css" rel="stylesheet" type="text/css">
       <!--<link rel="icon" href="data:;base64,iVBORw0KGgo=">-->
-      <title>Dublin Bikes project</title>
+      <title>Dublin Bikes</title>
        <style>
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
@@ -31,16 +31,18 @@ padding: 0;
        </style>
    </head>
    <body>
+      
+      <div class="se-pre-con"></div>
+
        <div class="bg">
 	   <header>
     <img src="../static/images/Dublin_Bikes_logo.jpg" alt="BikeLogo" style="float: right; width: 200px; height: 90px; border: none; margin-top: 8px;">
-  <h1>Dublin Bikes project</h1>
+  <h1>Dublin Bikes project &#x1f6b2;</h1>
        </header>
        <br><br>
       
 <!-- Display the map -->
-            <div class="inline" id="map" style="width:60%;height:50%;">
-                                <script src="/static/js/app.js"></script>
+    <div class="inline" id="map" style="width:60%;height:50%;"><script src="/static/js/app.js"></script>
                                  </div>
                  
 <!--  To display current weather information etc.   -->
@@ -89,6 +91,7 @@ padding: 0;
                <option value="hourly">Hourly</option>
                           </select>
        <div class="stats" id ="daily_div"></div>
+           <p>The trends for available bikes and stands</p>
            </div>
                
        
