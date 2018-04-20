@@ -45,8 +45,8 @@ marker.metadata = {type: "point", id: station.station_number};
                             station.banking = "Yes";
                         }
 						var station_number = station.station_number;
-                    	var content = "Station name: " + station.station_name + "<br>" + "Station number: " + station.station_number + "<br>" + "Address: " + station.station_address + "<br>" + "Banking:" +station.banking +"<br>";
-                        var button = "<button onclick='showDiv(); getOccupancy(" + station_number + ")'>Click here for more detailed information!</button>";
+                    	var content = "<b>Station name: " + station.station_name + "<br>" + "Station number: " + station.station_number + "<br>" + "Address: " + station.station_address + "<br>" + "Banking:" +station.banking +"</b><br>";
+                        var button = "<button onclick='showDiv(); getOccupancy(" + station_number + ")'><b>More details!</b></button>";
                         infoWindow.setContent(content + "<br> " + button);
                         infoWindow.open(map, marker);
                     }
@@ -79,12 +79,12 @@ function defineMarker(bikes, stands) {
 	console.log(bikes,stands);
        
             //sliderChecked shows the user the number of available bikes at each station
-            if ((bikes/stands)<=0.3) {
-                return '../static/images/green1.png'            }
-        else if (bikes/stands<=0.6) {
+            if ((bikes/stands)<=0.33) {
+                return '../static/images/red1.png'            }
+        else if (bikes/stands<=0.66) {
                 return '../static/images/yellow1.png'
             } else {
-                return '../static/images/red1.png'
+                return '../static/images/green1.png'
             }
       
          
@@ -172,10 +172,10 @@ function drawChart(data) {
 
 
     //Set chart options
-    var options = {'title': 'Daily Averages:', 'width': 450, 'height': 350};
+    var options = {'title': 'Daily Averages:', 'width': 450, 'height': 290};
 
     //instantiate and draw our chart, passing in some options
-    var chart = new google.charts.Bar(document.getElementById('daily_div'));
+    var chart =  new google.charts.Bar(document.getElementById('daily_div'));
     chart.draw(data_daily, options);
 
     $('#dTime').show();
@@ -200,6 +200,9 @@ function getPrediction(){
     $.get("/predicted_value?station_number=" + station_number + "&date_time=" + date_time + "&hire_or_return=" + hire_or_return, function(data){
         //alert(data);
         //alert(int(data.substr(2,7)));
+        if (parseInt(data) < 0){
+            data = String(0);
+        }
         if (hire_or_return=="hire"){
             document.getElementById("predicted_bikes").innerHTML="<p> Number of bikes available at given time and date at above station is " + data + "</p>";
         }
@@ -245,6 +248,7 @@ function show() {
     }
     else
  {
+         document.getElementById("predicted_bikes").style.display="inline-block";
         document.getElementById("predicted_bikes").innerHTML="Please wait while we fetch the required details";
         getPrediction();
         

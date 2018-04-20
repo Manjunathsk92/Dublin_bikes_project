@@ -119,7 +119,7 @@ div.container2 {
 div.polaroid {
 
     text-align: center;
-    font-size: 17.5px;
+    font-size: 16px;
     float: left;
     display: none;
     width: 250px;
@@ -159,7 +159,10 @@ button:hover {
 
 }
 #button1 {
-    width: 8%;
+    width: 10%;
+    text-align: center;
+    color: aliceblue;
+    background-color: #084C55;
 }
 
 
@@ -177,6 +180,19 @@ button:hover {
     float: left;*/
     /*width: 50%;
     margin-top: 50%;*/
+    border-radius: 15px;
+    color: white;
+    padding: 1px;
+    /*position: ;
+    float: right;*/
+    right: 10px;
+    width: 600px;
+    height: 50px;
+    font-size: 16px;
+    background-color: #084C55;
+    text-align: left;
+    border: 2px solid black;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
 }
 
@@ -184,12 +200,14 @@ button:hover {
     /*width: 10%;
     float: right;*/
     margin-right: 5%;
-    margin-top: 5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 #dTime{
-    width: 10%;
+    width: 30%;
     float: right;
-    margin-right: 25%;
+    margin-right: 5%;
+    color: aliceblue;
 }
 
 .no-js #loader { display: none;  }
@@ -203,4 +221,15 @@ button:hover {
 	z-index: 9999;
 	background: url(images/cyc1200.gif) center no-repeat #084C55;
 
+}
+#chart_text{
+    width: 100%;
+    background-color: #084C55;
+border-radius: 15px;
+    color: white;
+    padding: 5px;
+    right: 10px;
+    left: 10px;
+    border: 2px solid black;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

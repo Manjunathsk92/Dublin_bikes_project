@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <head>
       <meta charset="utf-8">
       <!-- Google map API and key -->
@@ -37,7 +38,7 @@ padding: 0;
        <div class="bg">
 	   <header>
     <img src="../static/images/Dublin_Bikes_logo.jpg" alt="BikeLogo" style="float: right; width: 200px; height: 90px; border: none; margin-top: 8px;">
-  <h1>Dublin Bikes project &#x1f6b2;</h1>
+  <h1>Dublin Bikes &#x1f6b2;</h1>
        </header>
        <br><br>
       
@@ -81,17 +82,18 @@ padding: 0;
            <br>
        
        <br>
-           <div id="predicted_bikes"></div>
+           <div id="predicted_bikes"><script>predicted_bikes.style.display="none"</script></div>
     </div>
                
        
        <div id="dTime">
            <select id="select-type" onchange="updateType(this)">
-               <option selected value="daily">Daily</option>
-               <option value="hourly">Hourly</option>
+               <option selected value="daily">Last week's trend</option>
+               <option value="hourly">Yesterday's hourly trend</option>
                           </select>
+           <p id="chart_text"> Below is a chart displaying trends for the selected station. Please use above dropdown to switch between lastweek's trends and yesterday's hourly trend</p>
        <div class="stats" id ="daily_div"></div>
-           <p>The trends for available bikes and stands</p>
+           
            </div>
                
        
