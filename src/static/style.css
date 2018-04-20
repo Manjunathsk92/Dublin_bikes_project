@@ -51,22 +51,11 @@ header, footer {
     
 }
 
-
-
 #map {
 
     border-radius: 5px;
 
 }
-
-
-
-/*div.container {
-    width: 440px;
-    height: 400px;
-    float:left;
-}*/
-
 
 
 div.inline {
@@ -167,24 +156,15 @@ button:hover {
 
 
 #dropdown{
-    /*margin-top: 30%;*/
-    /*height: 50%;*/
-    /*clear: both;
-    float: left;
-    clear: left;*/
+    
     float: left;
     clear: left;
 }
 #predicted_bikes {
-    /*margin-left: 30%;
-    float: left;*/
-    /*width: 50%;
-    margin-top: 50%;*/
+    
     border-radius: 15px;
     color: white;
     padding: 1px;
-    /*position: ;
-    float: right;*/
     right: 10px;
     width: 600px;
     height: 50px;
@@ -198,8 +178,7 @@ button:hover {
 }
 
 #daily_div{
-    /*width: 10%;
-    float: right;*/
+  
     margin-right: 5%;
     margin-top: 2%;
     margin-bottom: 2%;

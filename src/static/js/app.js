@@ -5,6 +5,7 @@ var selected_time;
 var date_time;
 var hire_or_return;
 
+//Function to display station markers
 function showStationMarkers()
 {
 
@@ -60,20 +61,19 @@ marker.metadata = {type: "point", id: station.station_number};
         })
 }
 
-
+//function to get current weather information
 function getWeatherInfo(){
    
     var jqxhr =$.getJSON('http://api.openweathermap.org/data/2.5/weather?id=7778677&APPID=a333fd4b6cc086808ce5e483c98b85f6',function(data){
    
     var icon = data.weather[0].icon;
     var iconUrl = ("<img src='http://openweathermap.org/img/w/" + icon + ".png'>");
-    var weatherdata= "<br><b><u>Weather Details:</u></b> <br><br>Current Weather:" + data.weather[0].description+ "<br> Current Temperature: " + parseInt(data.main.temp - 273) + " &#8451;" +"<br> Wind Speed: " + parseFloat(data.wind.speed * 3.6).toFixed(2) + " km/hr" + "<br>" +iconUrl + "<br>";
-    //alert(weatherdata);
+    var weatherdata= "<br><b><u>Weather Details:</u></b> <br><br>Current Weather:" + data.weather[0].description+ "<br> Current Temperature: " + parseInt(data.main.temp - 273) + " &#8451;" +"<br> Wind Speed: " + parseFloat(data.wind.speed * 3.6).toFixed(2) + " km/hr" + "<br>" +iconUrl + "<br>";//alert(weatherdata);
         document.getElementById("weather_info").innerHTML = weatherdata;
 });
 }
-//showStationMarkers();
 
+//Function to choose appropriate color for markers
 function defineMarker(bikes, stands) {
     //function which defines the color of the marker, depending on the occupancy of the station
 	console.log(bikes,stands);
@@ -91,13 +91,14 @@ function defineMarker(bikes, stands) {
         
     }
 
+
 function showDiv(){
     $(".se-pre-con").show();
     div = document.getElementById("display");
     div.style.display = "inline-block";
 }
 
-
+//get current occupancy
 function getOccupancy(station_number) {
     document.getElementById("availability").style.display = "inline-block";
     var jqxhr = $.getJSON("/station_details?station_number=" + station_number, function(data){
@@ -126,7 +127,7 @@ function getDropDown(stations) {
 var corrected_date;
     for (var i = 0; i < 5; i++) {
         var currentDate = new Date(new Date().getTime() + 24*i * 60 * 60 * 1000);
-        //alert(currentDate);
+        
         var new_date = String(currentDate.getDate());
         if (new_date.length == 1) {
             new_date= "0" + new_date;
@@ -181,25 +182,27 @@ function drawChart(data) {
     $('#dTime').show();
 }
 
+
 function updateType(ele) {
 	type = ele.options[ele.selectedIndex].value;
 	updateChart(station_number, type);
 }
 
+//display the charts
 function updateChart() {
-    //alert("in get dropdown");
+    
 	$.getJSON("/charts_daily?station_number=" + station_number + "&type=" + type, function(data) {
         $(".se-pre-con").hide();
 		google.charts.setOnLoadCallback(drawChart(data));
 	});
-    //alert(date_time);
+    
     
 }
 
+//get the prediction of bikes/stands
 function getPrediction(){
     $.get("/predicted_value?station_number=" + station_number + "&date_time=" + date_time + "&hire_or_return=" + hire_or_return, function(data){
-        //alert(data);
-        //alert(int(data.substr(2,7)));
+        
         if (parseInt(data) < 0){
             data = String(0);
         }
@@ -214,29 +217,25 @@ function getPrediction(){
     updateChart();
 }
 
+//function called upon clicking submit button to validate data and get the requested details
 function show() {
     $(".se-pre-con").show();
     station_number=document.getElementById("select").value;
-    //alert(ele);
-    //alert(document.getElementById("select").value);
-	//station_number = ele.options[ele.selectedIndex].value;
-    //alert(station_number);
+    
     selected_date=document.getElementById("select_date").value;
     selected_time=document.getElementById("select_time").value;
     var current_date = new Date(new Date().getTime());
-    //alert(selected_date.substring(8,));
-    //alert(current_date.getDate());
+   
     
-    //alert(current_date);
     hire_or_return=document.getElementById("hire_or_return").value;
     date_time = String(selected_date) + ' ' + String(selected_time);
-    //alert(date_time);
+   
     if (selected_date == '' || selected_time == '' || hire_or_return=='' || station_number==''){
         alert("Please enter all the details and click submit");
         $(".se-pre-con").hide();
     }
     else if (selected_date.substring(8,) == current_date.getDate()){
-        //alert(current_date.getHours());
+        
         if (parseInt(selected_time) <= parseInt(current_date.getHours())){
             alert("Please select valid time. ");
             $(".se-pre-con").hide();
@@ -257,21 +256,15 @@ function show() {
 
 }
 
-
+//function to load page loader
 function init() {
     $(".se-pre-con").show();
 	showStationMarkers();
 }
 
+//function to hide page loader
 $(document).ready(function() {
 	$('#dTime').hide();
 });
 
 window.onload = init();
-
-
-//pageloader
-//$(window).load(function() {
-		// Animate loader off screen
-//		$(".se-pre-con").fadeOut("slow");;
-//	});
