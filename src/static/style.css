@@ -193,6 +193,7 @@ button:hover {
     text-align: left;
     border: 2px solid black;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 18%;
     
 }
 
@@ -227,6 +228,18 @@ button:hover {
     background-color: #084C55;
 border-radius: 15px;
     color: white;
+    padding: 5px;
+    right: 10px;
+    left: 10px;
+    border: 2px solid black;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#instruct_user{
+    background-color: #084C55;
+border-radius: 15px;
+    color: white;
+    width: 100%;
     padding: 5px;
     right: 10px;
     left: 10px;
